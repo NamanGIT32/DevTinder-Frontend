@@ -1,13 +1,22 @@
 import { useState } from 'react'
-import Navbar from './components/Navbar'
+import {BrowserRouter, Route, Routes} from 'react-router-dom'
+import Body from './Body'
+import Login from './components/Auth/Login'
+import Signup from './components/Auth/Signup'
+
 const App = () => {
 
   return (
     <>
-      <Navbar/>
-      <div className="text-4xl font-bold underline">
-      Hello world!
-    </div>
+      <BrowserRouter basename='/' >
+        <Routes>
+          {/* this is a body route and childrens of body route */}
+          <Route path='/' element={<Body/>} >
+            <Route path='/login' element={<Login/>} />
+            <Route path='signup' element={<Signup/>} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
     </>
   ) 
 }
