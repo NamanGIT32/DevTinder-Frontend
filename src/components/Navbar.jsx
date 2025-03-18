@@ -24,9 +24,9 @@ const Navbar = () => {
 
 
   return (
-    <div className="navbar bg-base-100 shadow-sm">
+    <div className="navbar bg-success-content shadow-sm">
   <div className="flex-1">
-    <Link to="/" className="btn btn-ghost text-xl">DevTalk</Link>
+    <Link to="/" className="btn btn-ghost text-xl">{"< " +"DevTalk"+ " />"}</Link>
   </div>
   {user ?  
   <div className="flex gap-2 items-center">
@@ -48,7 +48,7 @@ const Navbar = () => {
             <span className="badge">New</span>
           </Link>
         </li>
-        <li><a>Settings</a></li>
+        <li><Link to="/connections">Connections</Link></li>
         <li><a onClick={()=>handleLogout()}>Logout</a></li>
       </ul>
     </div>
@@ -62,5 +62,3 @@ const Navbar = () => {
 }
 
 export default Navbar
-
-// "https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
