@@ -20,9 +20,7 @@ const Connections = () => {
   };
 
   useEffect(() => {
-    if (!connections) {
       getConnections();
-    }
   }, []);
   if (!connections)
     return <div className="text-2xl font-bold">No connections found</div>;

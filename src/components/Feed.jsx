@@ -5,11 +5,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { addFeed } from "../redux/feedSlice";
 import { addRequests } from "../redux/requestsSlice";
 
-const Feed = () => {
+const getFeed = () => {
   const dispatch = useDispatch();
   const userFeed = useSelector((state) => state.feed);
   const userRequests = useSelector((state) => state.requests);
-  const Feed = async () => {
+  const getFeed = async () => {
     try {
       const res = await axios.get(BASE_URL + "/user/feed", {
         withCredentials: true,
@@ -33,14 +33,25 @@ const Feed = () => {
       console.error(error);
     }
   };
-  useEffect(() => {
-    if (!userFeed) {
-      Feed();
+
+  const reviewRequest = async (status, requestId) => {
+    try {
+      const res = await axios.post(BASE_URL + "/request/review/" + status + "/" + requestId, {}, {
+        withCredentials: true,
+      });
+      const data = res.data;
+      console.log(res);
+      getRequests();
+    } catch (error) {
+      console.error(error);
     }
+  };
+  useEffect(() => {
+    getFeed();
     getRequests();
   }, []);
 
-  
+
   return (
     <div className="flex h-screen ">
       {/* sidebar */}
@@ -67,10 +78,10 @@ const Feed = () => {
                   </div>
                 </div>
                 <div className="flex items-center gap-3 ">
-                  <button className="btn btn-soft btn-success rounded-full h-12 w-12">
+                  <button className="btn btn-soft btn-success rounded-full h-12 w-12" onClick={()=> reviewRequest("accepted", request._id)}>
                     ✓
                   </button>
-                  <button className="btn btn-soft btn-error rounded-full h-12 w-12">
+                  <button className="btn btn-soft btn-error rounded-full h-12 w-12" onClick={()=> reviewRequest("rejected", request._id)}>
                     ✘
                   </button>
                 </div>

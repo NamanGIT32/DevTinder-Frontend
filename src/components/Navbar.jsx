@@ -22,7 +22,6 @@ const Navbar = () => {
     }
   };
 
-
   return (
     <div className="navbar bg-success-content shadow-sm">
   <div className="flex-1">
