@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useEffect } from "react";
 import { BASE_URL } from "../utils/constants";
 import { useDispatch, useSelector } from "react-redux";
-import { addConnections } from "../redux/connectionsSlice";
+import { addConnections, removeConnection } from "../redux/connectionsSlice";
 
 const Connections = () => {
   const dispatch = useDispatch();
@@ -19,6 +19,18 @@ const Connections = () => {
     }
   };
 
+  const remove = async (connectionId) => {
+    try {
+      const res = await axios.post(BASE_URL + "/connection/remove/" + connectionId, {}, {
+        withCredentials: true
+      });
+      console.log(res);
+      dispatch(removeConnection(connectionId));
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   useEffect(() => {
       getConnections();
   }, []);
@@ -30,7 +42,8 @@ const Connections = () => {
       <div className="mt-10  flex flex-col gap-5">
         {connections ? (
           connections.map((connection) => {
-            const {firstName, middleName, lastName, age, gender, about, imageURL, skills, _id} = connection
+            const {connectionId} = connection;
+            const {firstName, middleName, lastName, age, gender, about, imageURL, skills, _id} = connection.user;
             return (
               <div key={_id} className="w-[700px] bg-base-100 flex gap-6 shadow-sm border border-accent-content rounded-md px-5 py-3">
                 
@@ -56,7 +69,7 @@ const Connections = () => {
                     </div>
                     <div className="flex gap-2">
                     <button className="btn btn-sm btn-soft btn-accent">View Profile</button>
-                      <button className="btn btn-sm btn-soft btn-error ">Remove</button>
+                      <button className="btn btn-sm btn-soft btn-error" onClick={() => remove(connectionId)}>Remove</button>
                     </div>
                   </div>
 
