@@ -30,9 +30,9 @@ const Connections = () => {
       <div className="mt-10  flex flex-col gap-5">
         {connections ? (
           connections.map((connection) => {
-            const {firstName, middleName, lastName, age, gender, about, imageURL, skills} = connection
+            const {firstName, middleName, lastName, age, gender, about, imageURL, skills, _id} = connection
             return (
-              <div className="w-[700px] bg-base-100 flex gap-6 shadow-sm border border-accent-content rounded-md px-5 py-3">
+              <div key={_id} className="w-[700px] bg-base-100 flex gap-6 shadow-sm border border-accent-content rounded-md px-5 py-3">
                 
                  {(imageURL==="" || !imageURL) ? 
                  <img
@@ -66,7 +66,7 @@ const Connections = () => {
                   </div>
                   <p className="text-sm line-clamp-2">{about} </p>
                   <div className="mt-3">
-                    {skills && skills.slice(0,5).map((skill) => <button className="border border-[#b2d8d8] text-[#b2d8d8] px-2 py-1 text-xs rounded-sm mr-2">{skill}</button>)}
+                    {skills && skills.slice(0,5).map((skill, index) => <button key={index} className="border border-[#b2d8d8] text-[#b2d8d8] px-2 py-1 text-xs rounded-sm mr-2">{skill}</button>)}
                   </div>
                 </div>
               </div>

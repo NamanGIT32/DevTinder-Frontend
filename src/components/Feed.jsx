@@ -3,9 +3,9 @@ import React, { useEffect } from "react";
 import { BASE_URL } from "../utils/constants";
 import { useDispatch, useSelector } from "react-redux";
 import { addFeed } from "../redux/feedSlice";
-import { addRequests } from "../redux/requestsSlice";
+import { addRequests, removeRequest } from "../redux/requestsSlice";
 
-const getFeed = () => {
+const Feed = () => {
   const dispatch = useDispatch();
   const userFeed = useSelector((state) => state.feed);
   const userRequests = useSelector((state) => state.requests);
@@ -41,7 +41,7 @@ const getFeed = () => {
       });
       const data = res.data;
       console.log(res);
-      getRequests();
+      dispatch(removeRequest(requestId));
     } catch (error) {
       console.error(error);
     }
