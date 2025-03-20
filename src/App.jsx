@@ -8,6 +8,7 @@ import appStore from './redux/appStore'
 import Feed from './components/Feed'
 import Profile from './components/Profile'
 import Connections from './components/Connections'
+import IgnoredConnections from './components/IgnoredConnections'
 
 const App = () => {
 
@@ -23,6 +24,7 @@ const App = () => {
             <Route path='/login' element={<Login/>} />
             <Route path='/signup' element={<Signup/>} />
             <Route path='/connections' element={<Connections/>} />
+            <Route path='/ignoredconnections' element={<IgnoredConnections/>} />
           </Route>
         </Routes>
       </BrowserRouter>

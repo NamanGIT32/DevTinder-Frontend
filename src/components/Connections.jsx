@@ -6,7 +6,7 @@ import { addConnections, removeConnection } from "../redux/connectionsSlice";
 
 const Connections = () => {
   const dispatch = useDispatch();
-  const connections = useSelector((state) => state.connections);
+  const connections = useSelector((state) => state.connections.connections);
   const getConnections = async () => {
     try {
       const res = await axios.get(BASE_URL + "/user/getAllConnections", {
@@ -30,7 +30,7 @@ const Connections = () => {
       console.error(error);
     }
   }
-
+  console.log(connections)
   useEffect(() => {
       getConnections();
   }, []);
