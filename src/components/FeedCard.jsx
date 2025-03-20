@@ -29,10 +29,11 @@ const FeedCard = ({
   }
   return (
     <div className="flex items-center gap-6">
-      <button className="btn btn-success rounded-full h-16 w-16 text-3xl"
-        onClick={()=> sendRequest("interested", _id)}
+      
+      <button className="btn btn-error rounded-full h-16 w-16 text-2xl"
+        onClick={()=> sendRequest("ignored", _id)}
       >
-        ✓
+        ✘
       </button>
       <div className=" bg-base-300 mx-auto w-96 shadow-lg rounded-md">
         <img
@@ -58,10 +59,10 @@ const FeedCard = ({
           </div>
         </div>
       </div>
-      <button className="btn btn-error rounded-full h-16 w-16 text-2xl"
-        onClick={()=> sendRequest("ignored", _id)}
+      <button className="btn btn-success rounded-full h-16 w-16 text-3xl"
+        onClick={()=> sendRequest("interested", _id)}
       >
-        ✘
+        ✓
       </button>
     </div>
   );

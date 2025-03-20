@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addFeed } from "../redux/feedSlice";
 import { addRequests, removeRequest } from "../redux/requestsSlice";
 import FeedCard from "./FeedCard";
+import Requests from "./Requests";
 
 const Feed = () => {
   const dispatch = useDispatch();
@@ -62,42 +63,7 @@ const Feed = () => {
       <div className="w-[420px] bg-base-300 p-4 px-6 overflow-y-scroll">
         <h1 className="text-2xl font-semibold">Requests</h1>
         <hr className="mt-2" />
-        <div className="flex flex-col gap-6 mt-6 ">
-          {userRequests &&
-            userRequests.map((request) => (
-              <div
-                key={request.fromUserId._id}
-                className="flex justify-between"
-              >
-                <div className="flex items-center gap-4">
-                  <img
-                    src={request.fromUserId.imageURL}
-                    alt="img"
-                    className="shrink-0 object-cover rounded-full h-14 w-14 border border-white"
-                  />
-                  <div className="text-lg">
-                    {request.fromUserId.firstName +
-                      " " +
-                      request.fromUserId.lastName}
-                  </div>
-                </div>
-                <div className="flex items-center gap-3 ">
-                  <button
-                    className="btn btn-soft btn-success rounded-full h-12 w-12"
-                    onClick={() => reviewRequest("accepted", request._id)}
-                  >
-                    ✓
-                  </button>
-                  <button
-                    className="btn btn-soft btn-error rounded-full h-12 w-12"
-                    onClick={() => reviewRequest("rejected", request._id)}
-                  >
-                    ✘
-                  </button>
-                </div>
-              </div>
-            ))}
-        </div>
+        <Requests userRequests={userRequests} />
       </div>
 
       <div className="flex items-center justify-center mx-auto ">
