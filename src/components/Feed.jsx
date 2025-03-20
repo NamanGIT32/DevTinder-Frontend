@@ -4,6 +4,7 @@ import { BASE_URL } from "../utils/constants";
 import { useDispatch, useSelector } from "react-redux";
 import { addFeed } from "../redux/feedSlice";
 import { addRequests, removeRequest } from "../redux/requestsSlice";
+import FeedCard from "./FeedCard";
 
 const Feed = () => {
   const dispatch = useDispatch();
@@ -36,9 +37,13 @@ const Feed = () => {
 
   const reviewRequest = async (status, requestId) => {
     try {
-      const res = await axios.post(BASE_URL + "/request/review/" + status + "/" + requestId, {}, {
-        withCredentials: true,
-      });
+      const res = await axios.post(
+        BASE_URL + "/request/review/" + status + "/" + requestId,
+        {},
+        {
+          withCredentials: true,
+        }
+      );
       const data = res.data;
       console.log(res);
       dispatch(removeRequest(requestId));
@@ -50,7 +55,6 @@ const Feed = () => {
     getFeed();
     getRequests();
   }, []);
-
 
   return (
     <div className="flex h-screen ">
@@ -78,10 +82,16 @@ const Feed = () => {
                   </div>
                 </div>
                 <div className="flex items-center gap-3 ">
-                  <button className="btn btn-soft btn-success rounded-full h-12 w-12" onClick={()=> reviewRequest("accepted", request._id)}>
+                  <button
+                    className="btn btn-soft btn-success rounded-full h-12 w-12"
+                    onClick={() => reviewRequest("accepted", request._id)}
+                  >
                     ✓
                   </button>
-                  <button className="btn btn-soft btn-error rounded-full h-12 w-12" onClick={()=> reviewRequest("rejected", request._id)}>
+                  <button
+                    className="btn btn-soft btn-error rounded-full h-12 w-12"
+                    onClick={() => reviewRequest("rejected", request._id)}
+                  >
                     ✘
                   </button>
                 </div>
@@ -90,27 +100,10 @@ const Feed = () => {
         </div>
       </div>
 
-      <div className="flex items-center justify-center mx-auto">
+      <div className="flex items-center justify-center mx-auto ">
         {/* card */}
-        <div className="card bg-base-300 mx-auto w-96 shadow-sm">
-          <figure>
-            <img
-              src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
-              alt="Shoes"
-            />
-          </figure>
-          <div className="card-body">
-            <h2 className="card-title">Card Title</h2>
-            <p>
-              A card component has a figure, a body part, and inside body there
-              are title and actions parts
-            </p>
-            <div className="card-actions flex gap-3 items-center">
-              <button className="btn btn-primary">Ignored</button>
-              <button className="btn btn-primary">Accept</button>
-            </div>
-          </div>
-        </div>
+
+        {userFeed && <FeedCard {...userFeed[0]} />}
       </div>
     </div>
   );
