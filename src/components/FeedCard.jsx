@@ -38,7 +38,7 @@ const FeedCard = ({
       <div className=" bg-base-300 mx-auto w-96 shadow-lg rounded-md">
         <img
           src={imageURL}
-          alt="Shoes"
+          alt="img"
           className="w-full shrink-0 object-cover"
         />
         <div className="card-body">

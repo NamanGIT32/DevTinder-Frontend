@@ -1,6 +1,23 @@
 import React from "react";
 
 const Requests = ({ userRequests }) => {
+
+  const reviewRequest = async (status, requestId) => {
+      try {
+        const res = await axios.post(
+          BASE_URL + "/request/review/" + status + "/" + requestId,
+          {},
+          {
+            withCredentials: true,
+          }
+        );
+        const data = res.data;
+        console.log(res);
+        dispatch(removeRequest(requestId));
+      } catch (error) {
+        console.error(error);
+      }
+    };
   if (!userRequests) {
     return (
       <div className="flex flex-col gap-6 items-center my-6">
@@ -19,7 +36,7 @@ const Requests = ({ userRequests }) => {
 
   if (userRequests.length === 0) {
     return (
-      <div className="text-center font-semibold text-xl">
+      <div className="text-center font-semibold text-xl mt-4">
         {" "}
         All good!! No pending request
       </div>

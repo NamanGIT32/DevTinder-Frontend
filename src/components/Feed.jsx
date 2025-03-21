@@ -36,22 +36,6 @@ const Feed = () => {
     }
   };
 
-  const reviewRequest = async (status, requestId) => {
-    try {
-      const res = await axios.post(
-        BASE_URL + "/request/review/" + status + "/" + requestId,
-        {},
-        {
-          withCredentials: true,
-        }
-      );
-      const data = res.data;
-      console.log(res);
-      dispatch(removeRequest(requestId));
-    } catch (error) {
-      console.error(error);
-    }
-  };
   useEffect(() => {
     getFeed();
     getRequests();
