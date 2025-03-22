@@ -25,7 +25,10 @@ const Body = () => {
   return (
     <div>
         <Navbar/>
-        <Outlet/>
+        <div className='pt-16'>
+          <Outlet/>
+        </div>
+        
     </div>
   )
 }

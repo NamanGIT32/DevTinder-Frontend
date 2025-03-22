@@ -23,7 +23,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className="navbar bg-success-content shadow-sm">
+    <div className="navbar bg-success-content shadow-sm fixed">
   <div className="flex-1">
     <Link to="/" className="btn btn-ghost text-xl">{"< " +"DevTalk"+ " />"}</Link>
   </div>

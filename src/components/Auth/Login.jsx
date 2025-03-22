@@ -44,7 +44,6 @@ const Login = () => {
           password: password,
           firstName: firstName,
           lastName: lastName,
-          age: age,
         },
         {
           withCredentials: true,

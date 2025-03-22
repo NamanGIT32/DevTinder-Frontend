@@ -35,17 +35,17 @@ const FeedCard = ({
       >
         ✘
       </button>
-      <div className=" bg-base-300 mx-auto w-96 shadow-lg rounded-md">
+      <div className="w-96 shadow-lg rounded-md h-[700px] bg-[#16191e] overflow-hidden scrollbar"> 
         <img
           src={imageURL}
           alt="img"
-          className="w-full shrink-0 object-cover"
+          className="w-full shrink-0 object-cover h-[450px] "
         />
-        <div className="card-body">
-          <h1 className="text-xl font-semibold">
+        <div className="mt-4 px-3 pb-3">
+          <h1 className="text-xl font-semibold my-4">
             {firstName + " " + lastName}
           </h1>
-          <p>{about && about}</p>
+          <p className="line-clamp-4">{about && about}</p>
           <div className="mt-3">
             {skills &&
               skills.slice(0, 3).map((skill, index) => (
@@ -57,6 +57,7 @@ const FeedCard = ({
                 </button>
               ))}
           </div>
+        
         </div>
       </div>
       <button className="btn btn-success rounded-full h-16 w-16 text-3xl"

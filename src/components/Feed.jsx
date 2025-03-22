@@ -44,13 +44,13 @@ const Feed = () => {
   return (
     <div className="flex h-screen ">
       {/* sidebar */}
-      <div className="w-[420px] bg-base-300 p-4 px-6 overflow-y-scroll">
+      <div className="w-[420px] bg-base-300 p-4 px-6 overflow-y-scroll scrollbar ">
         <h1 className="text-2xl font-semibold">Requests</h1>
         <hr className="mt-2" />
         <Requests userRequests={userRequests} />
       </div>
 
-      <div className="flex items-center justify-center mx-auto ">
+      <div className="mx-auto mt-20">
         {/* card */}
 
         {userFeed && <FeedCard {...userFeed[0]} />}
