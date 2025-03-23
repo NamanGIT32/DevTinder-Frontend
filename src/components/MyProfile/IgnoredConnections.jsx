@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useEffect } from 'react'
-import { BASE_URL } from '../utils/constants';
-import { addIgnoredConnections, removeIgnoredConnectionAction } from '../redux/connectionsSlice';
+import { BASE_URL } from "../../utils/constants";
+import { addIgnoredConnections, removeIgnoredConnectionAction } from '../../redux/connectionsSlice';
 import { useDispatch, useSelector } from 'react-redux';
 
 const IgnoredConnections = () => {
@@ -41,10 +41,10 @@ const IgnoredConnections = () => {
         <div className="flex flex-col items-center">
           <h1 className="text-2xl font-bold text-center mt-10">My Ignored Connections</h1>
           <div className="mt-10  flex flex-col gap-5">
-            {ignoredConnections ? (
+            {ignoredConnections.length!==0 ? (
               ignoredConnections.map((connection) => {
                 const {connectionId} = connection;
-                const {firstName, middleName, lastName, age, gender, about, imageURL, skills, _id} = connection.user;
+                const {firstName, middleName, lastName, age, gender, about, imageURL, skills, _id} = connection?.user;
                 return (
                   <div key={_id} className="w-[700px] bg-base-100 flex gap-6 shadow-sm border border-accent-content rounded-md px-5 py-3">
                     

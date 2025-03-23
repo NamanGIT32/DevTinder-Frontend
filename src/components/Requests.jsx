@@ -1,7 +1,10 @@
 import React from "react";
-
+import { removeRequest } from "../redux/requestsSlice";
+import axios from "axios";
+import { BASE_URL } from "../utils/constants";
+import { useDispatch, useSelector } from "react-redux";
 const Requests = ({ userRequests }) => {
-
+  const dispatch = useDispatch();
   const reviewRequest = async (status, requestId) => {
       try {
         const res = await axios.post(
