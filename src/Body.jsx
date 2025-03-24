@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react'
 import Navbar from './components/Boundry/Navbar'
-import { Outlet } from 'react-router-dom'
+import { Outlet, useNavigate } from 'react-router-dom'
 import { BASE_URL } from './utils/constants'
 import axios from 'axios'
 import { useDispatch, useSelector } from 'react-redux'
 import { addUser } from './redux/userSlice'
 const Body = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch()
   const user = useSelector((state) => state.user);
   const fetchUser = async () => {
@@ -14,6 +15,9 @@ const Body = () => {
       const data = res.data;
       dispatch(addUser(data.data))
     } catch (error) {
+      if(error.status === 401){
+        navigate('/login');
+      }
       console.error(error);
     }
   }
