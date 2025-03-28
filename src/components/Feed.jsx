@@ -18,7 +18,7 @@ const Feed = () => {
       });
       const data = res.data;
       dispatch(addFeed(res.data.data));
-      console.log(res);
+      console.log(data);
     } catch (error) {
       console.error(error);
     }
@@ -30,7 +30,7 @@ const Feed = () => {
       });
       const data = res.data;
       dispatch(addRequests(res.data.data));
-      console.log(res);
+      console.log(data);
     } catch (error) {
       console.error(error);
     }
@@ -53,7 +53,7 @@ const Feed = () => {
       <div className="mx-auto mt-20">
         {/* card */}
 
-        {userFeed && <FeedCard {...userFeed[0]} />}
+        {userFeed && userFeed.length!==0 ? <FeedCard {...userFeed[0]} /> : <div className="text-2xl flex items-center justify-center text-semibold">Feed is empty!!</div>}
       </div>
     </div>
   );
