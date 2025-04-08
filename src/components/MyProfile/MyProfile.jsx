@@ -9,7 +9,7 @@ const MyProfile = () => {
   const navigate = useNavigate();
   const deleteAccount = async () => {
     try {
-      const res = await axios.delete(BASE_URL + '/user/deleteAccount', {}, {
+      const res = await axios.delete(BASE_URL + '/user/deleteAccount', {
         withCredentials: true
       });
       const data = res.data;
@@ -19,6 +19,7 @@ const MyProfile = () => {
       console.error(error);
     }
   };
+
   return (
     <div className="flex h-screen">
       <div className="w-[350px] bg-base-300 pt-10 flex flex-col gap-8">

@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react'
 import Navbar from './components/Boundry/Navbar'
-import { Outlet, useNavigate } from 'react-router-dom'
+import { Outlet, useLocation, useNavigate } from 'react-router-dom'
 import { BASE_URL } from './utils/constants'
 import axios from 'axios'
 import { useDispatch, useSelector } from 'react-redux'
 import { addUser } from './redux/userSlice'
 const Body = () => {
+  const location = useLocation();
   const navigate = useNavigate();
   const dispatch = useDispatch()
   const user = useSelector((state) => state.user);
@@ -28,8 +29,8 @@ const Body = () => {
   },[]);
   return (
     <div>
-        <Navbar/>
-        <div className='pt-16'>
+      {location.pathname!=="/login" &&  <Navbar/>}
+        <div className={` ${location.pathname==="/login" ? "pt-0" : "pt-16" } `}>
           <Outlet/>
         </div>
         

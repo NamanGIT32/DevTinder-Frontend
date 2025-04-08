@@ -21,6 +21,7 @@ const Login = () => {
         {
           emailId: email,
           password: password,
+          status: "online"
         },
         {
           withCredentials: true,
@@ -44,6 +45,7 @@ const Login = () => {
           password: password,
           firstName: firstName,
           lastName: lastName,
+          status: "online"
         },
         {
           withCredentials: true,

@@ -35,7 +35,7 @@ const FeedCard = ({
       >
         ✘
       </button>
-      <div className="w-96 shadow-lg rounded-md h-[700px] bg-[#16191e] overflow-hidden scrollbar">
+      <div className="w-96 shadow-lg rounded-md h-[600px] bg-[#16191e] overflow-y-scroll scrollbar">
         <img
           src={imageURL}
           alt="img"

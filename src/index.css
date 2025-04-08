@@ -1,9 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-.scrollbar::-webkit-scrollbar {
-  display: none;
-}
+
 .gradient-bg {
   background: radial-gradient(circle at 70% 80%, #1e293b, #0f172a, #000000);
   min-height: 100vh; /* Ensures it covers the full screen height */
@@ -50,3 +48,41 @@ h1 {
     background-color: #f9f9f9;
   }
 } 
+
+.scrollbar {
+  scrollbar-width: none; /* For Firefox */
+  -ms-overflow-style: none; /* For Internet Explorer/Edge */
+}
+
+.scrollbar::-webkit-scrollbar {
+  display: none; /* For Chrome, Safari, and Opera */
+}
+
+
+/* Your messages */
+.chat-end .chat-bubble {
+  background-color: #4f46e5; /* Indigo-600 */
+  color: white;
+}
+
+/* Other user messages */
+.chat-start .chat-bubble {
+  background-color: #1f2937; /* Gray-800 */
+  color: white;
+}
+
+.chat-bubble {
+  border-radius: 20px 20px 20px 5px;
+}
+
+.bg-chat {
+  /* background: linear-gradient(to bottom, #1f1f1f, #2b2b2b);*/
+   background-image: url("https://i.pinimg.com/736x/fa/99/31/fa9931e3351f625f864c39111b183650.jpg"),
+  
+}
+
+.transform {
+  transform: translateZ(0);
+}
+
+

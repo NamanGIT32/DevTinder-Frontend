@@ -1,10 +1,15 @@
 import axios from 'axios';
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { BASE_URL } from "../../utils/constants";
 import { addIgnoredConnections, removeIgnoredConnectionAction } from '../../redux/connectionsSlice';
 import { useDispatch, useSelector } from 'react-redux';
+import ProfileModal from "./ProfileModal";  
 
 const IgnoredConnections = () => {
+    const [viewProfile, setViewProfile] = useState(false);
+    const [targetId, setTargetId] = useState("");
+    const [connectionId, setConnectionId] = useState("");
+  
   const dispatch = useDispatch();
   const ignoredConnections = useSelector((state) => state.connections.ignoredConnections);
     const getIgnoredConnections = async () => {
@@ -33,15 +38,38 @@ const IgnoredConnections = () => {
     useEffect(()=>{
       getIgnoredConnections();
     },[]);
+    const handleViewProfile = (id, connectionId) => {
+      setViewProfile(true);
+      setTargetId(id);
+      setConnectionId(connectionId);
+    }
     if(!ignoredConnections){
-      return <div>No connections ignored</div>
+      return <div className="flex flex-col gap-6 items-center my-6">
+      <div className="text-2xl font-bold text-center mt-10">
+        My Ignored Connections
+      </div>
+      {Array.from({ length: 4 }).map((_, index) => (
+        <div
+          key={index}
+          className="flex items-center gap-4 border rounded-lg border-slate-400 px-5 py-3 w-[80%] "
+        >
+          <div className="skeleton w-32 h-32 shrink-0 rounded-full bg-slate-400"></div>
+          <div className="flex flex-col gap-3 w-full">
+            <div className="skeleton h-3 w-28 bg-slate-400"></div>
+            <div className="skeleton h-16 bg-slate-400"></div>
+          </div>
+        </div>
+      ))}
+    </div>
         
     }
     return (
         <div className="flex flex-col items-center">
-          <h1 className="text-2xl font-bold text-center mt-10">My Ignored Connections</h1>
+          <h1 className="text-2xl font-semibold text-center mt-10">My Ignored Connections</h1>
           <div className="mt-10  flex flex-col gap-5">
-            {ignoredConnections.length!==0 ? (
+            {ignoredConnections.length===0 ? (
+              <div className="text-2xl font-bold">No connections ignored </div>
+            ) : (
               ignoredConnections.map((connection) => {
                 const {connectionId} = connection;
                 const {firstName, middleName, lastName, age, gender, about, imageURL, skills, _id} = connection?.user;
@@ -69,7 +97,9 @@ const IgnoredConnections = () => {
                           <span className=" font-semibold text-xl">{lastName}</span>
                         </div>
                         <div className="flex gap-2">
-                        <button className="btn btn-sm btn-soft btn-accent">View Profile</button>
+                        <button className="btn btn-sm btn-soft btn-accent"
+                          onClick={() => handleViewProfile(_id, connectionId)}
+                        >View Profile</button>
                           <button className="btn btn-sm btn-soft btn-error" onClick={() => removeIgnoredConnection(connectionId)}>Remove</button>
                         </div>
                       </div>
@@ -86,10 +116,9 @@ const IgnoredConnections = () => {
                   </div>
                 );
               })
-            ) : (
-              <div className="text-2xl font-bold">No connections ignored </div>
             )}
           </div>
+          {viewProfile && <ProfileModal viewProfile={viewProfile} setViewProfile={setViewProfile} targetUserId={targetId} setTargetId={setTargetId} connectionId={connectionId}/>}
         </div>
       );
 }

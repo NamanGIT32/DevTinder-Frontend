@@ -10,6 +10,7 @@ import Profile from "./components/MyProfile/Profile";
 import Connections from "./components/MyProfile/Connections";
 import IgnoredConnections from "./components/MyProfile/IgnoredConnections";
 import MyProfile from "./components/MyProfile/MyProfile";
+import Chat from "./components/Chat";
 
 const App = () => {
   return (
@@ -20,6 +21,7 @@ const App = () => {
             {/* this is a body route and childrens of body route */}
             <Route path="/" element={<Body />}>
               <Route path="/" element={<Feed />} />
+              {/* <Route path="/chat/:targetUserId" element={<Chat />} /> */}
               <Route path="/profile" element={<MyProfile />}>
                 <Route path="" element={<Profile />} />
                 <Route path="connections" element={<Connections />} />
