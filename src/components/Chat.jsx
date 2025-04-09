@@ -19,21 +19,38 @@ const Chat = ({ targetUserId, isOpen, setIsOpen, setTargetId }) => {
 
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
 
+  const [userData, setUserData] = useState();
+  const getUserData = async (id) => {
+    try {
+      const res = await axios.get(
+        BASE_URL + "/profile/getTargetUserProfile/" + id,
+        {
+          withCredentials: true,
+        }
+      );
+      console.log(res.data);
+      setUserData(res.data.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  useEffect(() => {
+    getUserData(targetUserId);
+  }, []);
   const getChats = async () => {
     try {
       const res = await axios.get(BASE_URL + "/chat/getChat/" + targetUserId, {
         withCredentials: true,
       });
       console.log(res.data);
-      const chatMessages =
-        res?.data?.chats?.messages?.map((msg) => {
-          return {
-            firstName: msg?.senderId?.firstName,
-            image: msg?.senderId?.imageURL,
-            text: msg?.text,
-            id: msg?.senderId?._id,
-          };
-        });
+      const chatMessages = res?.data?.chats?.messages?.map((msg) => {
+        return {
+          firstName: msg?.senderId?.firstName,
+          image: msg?.senderId?.imageURL,
+          text: msg?.text,
+          id: msg?.senderId?._id,
+        };
+      });
       setMessages(chatMessages);
     } catch (error) {
       console.error(error);
@@ -103,7 +120,21 @@ const Chat = ({ targetUserId, isOpen, setIsOpen, setTargetId }) => {
         }`}
       >
         <div className="flex justify-between items-center border-b border-gray-400 p-2">
-          <h2 className="">Chat</h2>
+          <div className="flex gap-3 cursor-pointer">
+            <img
+              src={userData?.imageURL}
+              alt="Profile"
+              className="h-12 w-12 rounded-full object-cover"
+            />
+            <div>
+            <div className="font-semibold text-md">
+              {" "}
+              {userData?.firstName + " " + userData?.lastName}{" "}
+            </div>
+            <div className={`${userData?.status === "online" ? "text-green-500" : "text-red-500"}`}>{userData?.status} </div>
+
+            </div>
+          </div>
           <button
             className="btn btn-outline btn-primary"
             onClick={() => handleBack()}
@@ -114,8 +145,11 @@ const Chat = ({ targetUserId, isOpen, setIsOpen, setTargetId }) => {
 
         <div className="overflow-y-auto overflow-x-hidden flex-1 p-2 scrollbar bg-chat">
           {!messages ? (
-            <div className="flex items-center justify-center mt-20"
-            style={{ filter: 'drop-shadow(0 6px 4px rgba(34, 197, 94, 0.5))' }}
+            <div
+              className="flex items-center justify-center mt-20"
+              style={{
+                filter: "drop-shadow(0 6px 4px rgba(34, 197, 94, 0.5))",
+              }}
             >
               <DotLottieReact
                 src="https://lottie.host/eeee5726-eb6a-4229-b5a4-ec8e3dd68461/9ELoJRdj4m.lottie"

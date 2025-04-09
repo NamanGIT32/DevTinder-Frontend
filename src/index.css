@@ -58,6 +58,56 @@ h1 {
   display: none; /* For Chrome, Safari, and Opera */
 }
 
+@layer utilities {
+  .scrollbar-custom {
+    /* Firefox */
+    scrollbar-width: thin;
+    scrollbar-color: #326e66 transparent;
+  }
+
+  /* WebKit Browsers */
+  .scrollbar-custom::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  .scrollbar-custom::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .scrollbar-custom::-webkit-scrollbar-thumb {
+    background-color: #326e66;
+    border-radius: 9999px;
+    border: 2px solid transparent;
+    background-clip: content-box;
+    transition: opacity 0.3s ease;
+  }
+
+  .scrollbar-custom::-webkit-scrollbar-button {
+    display: none;
+    height: 0;
+    width: 0;
+  }
+
+  /* Auto-hide only works in WebKit */
+  .scrollbar-custom::-webkit-scrollbar {
+    opacity: 0;
+  }
+
+  .scrollbar-custom:hover::-webkit-scrollbar,
+  .scrollbar-custom:active::-webkit-scrollbar,
+  .scrollbar-custom:focus::-webkit-scrollbar {
+    opacity: 1;
+  }
+
+  /* Optional: Smooth hover effect for thumb */
+  .scrollbar-custom::-webkit-scrollbar-thumb:hover {
+    background-color: #3ba391;
+  }
+}
+
+
+
 
 /* Your messages */
 .chat-end .chat-bubble {
